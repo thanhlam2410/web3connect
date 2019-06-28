@@ -23,14 +23,14 @@ const ConnectToWalletConnect = (opts: IWalletConnectConnectorOptions) => {
     }
     const provider = new WalletConnectProvider({ bridge, qrcode });
 
-    if (!provider._walletConnector.connected) {
-      await provider._walletConnector.createSession();
+    if (!provider.connection.wc.connected) {
+      await provider.connection.wc.createSession();
 
       if (onUri) {
-        onUri(provider._walletConnector.uri);
+        onUri(provider.connection.wc.uri);
       }
 
-      provider._walletConnector.on("connect", async (error: Error) => {
+      provider.connection.wc.on("connect", async (error: Error) => {
         if (error) {
           return reject(error);
         }
