@@ -10,6 +10,8 @@ import NiftyWalletLogo from "../assets/niftyWallet.png";
 // @ts-ignore
 import PortisLogo from "../assets/portis.svg";
 // @ts-ignore
+import BitskiLogo from "../assets/bitski.png";
+// @ts-ignore
 import FortmaticLogo from "../assets/fortmatic.svg";
 // @ts-ignore
 import TrustLogo from "../assets/trust.png";
@@ -72,6 +74,15 @@ const providers: IProviderInfo[] = [
     logo: PortisLogo,
     type: "web",
     check: "isPortis",
+    styled: {
+      noShadow: true
+    }
+  },
+  {
+    name: "Bitski",
+    logo: BitskiLogo,
+    type: "web",
+    check: "isBitski",
     styled: {
       noShadow: true
     }

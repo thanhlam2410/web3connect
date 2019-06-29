@@ -71,6 +71,17 @@ class Core {
     }
   };
 
+  public connectToBitski = async () => {
+    try {
+      const provider = await connectors.ConnectToBitski(
+        this.providerOptions.bitski
+      );
+      this.onConnect(provider);
+    } catch (error) {
+      this.onError(error);
+    }
+  };
+
   public connectToWalletConnect = async () => {
     if (this.uri) {
       this.setState({ uri: "" });
@@ -153,6 +164,7 @@ class Core {
         connectToInjected={this.connectToInjected}
         connectToFortmatic={this.connectToFortmatic}
         connectToPortis={this.connectToPortis}
+        connectToBitski={this.connectToBitski}
         connectToWalletConnect={this.connectToWalletConnect}
       />,
       document.getElementById(WEB3_CONNECT_MODAL_ID)

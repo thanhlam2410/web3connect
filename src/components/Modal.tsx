@@ -124,6 +124,7 @@ interface IModalProps {
   lightboxOpacity: number;
   providerOptions: IProviderOptions;
   connectToInjected: SimpleFunction;
+  connectToBitski: SimpleFunction;
   connectToFortmatic: SimpleFunction;
   connectToPortis: SimpleFunction;
   connectToWalletConnect: SimpleFunction;
@@ -159,6 +160,7 @@ class Modal extends React.Component<IModalProps, IModalState> {
     injectedProvider: PropTypes.string.isRequired,
     lightboxOpacity: PropTypes.number.isRequired,
     providerOptions: PropTypes.object.isRequired,
+    connectToBitski: PropTypes.func.isRequired,
     connectToInjected: PropTypes.func.isRequired,
     connectToFortmatic: PropTypes.func.isRequired,
     connectToPortis: PropTypes.func.isRequired,
@@ -211,6 +213,7 @@ class Modal extends React.Component<IModalProps, IModalState> {
       injectedProvider,
       lightboxOpacity,
       providerOptions,
+      connectToBitski,
       connectToInjected,
       connectToFortmatic,
       connectToPortis,
@@ -224,6 +227,12 @@ class Modal extends React.Component<IModalProps, IModalState> {
 
     const displayPortis =
       providerOptions && providerOptions.portis && providerOptions.portis.id;
+
+    const displayBitski =
+      providerOptions &&
+      providerOptions.bitski &&
+      providerOptions.bitski.id &&
+      providerOptions.bitski.callbackUrl;
 
     const hideMainModalCard = !show || (!!uri && window.innerWidth <= 860);
     return (
@@ -246,10 +255,12 @@ class Modal extends React.Component<IModalProps, IModalState> {
                     name={"WalletConnect"}
                     onClick={connectToWalletConnect}
                   />
+                  {displayBitski && (
+                    <Provider name={"Bitski"} onClick={connectToBitski} />
+                  )}
                   {displayPortis && (
                     <Provider name={"Portis"} onClick={connectToPortis} />
                   )}
-
                   {displayFortmatic && (
                     <Provider name={"Fortmatic"} onClick={connectToFortmatic} />
                   )}
